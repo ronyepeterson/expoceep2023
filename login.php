@@ -3,7 +3,7 @@ session_start();
 include('conexao.php');
 
 if(empty($_POST['login']) || empty($_POST['senha'])) {
-	header('Location: index.php');
+	header('Location: loginexpoceep.php');
 	exit();
 }
 
@@ -20,11 +20,11 @@ echo $row;
 if($row == 1) {
 	$usuario_bd = mysqli_fetch_assoc($result);
 	$_SESSION['login'] = $usuario_bd['login'];
-	header('Location: painel.php');
+	header('Location: acesso.php');
 	exit();
 } else {
 	$_SESSION['nao_autenticado'] = true;
 	echo $query;
-	header('Location: index.php');
+	header('Location: loginexpoceep.php');
 	exit();
 }

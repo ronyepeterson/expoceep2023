@@ -1,0 +1,334 @@
+.bodyCadastro{
+    background-image: 'ceep.png';
+
+}
+.imghead{
+    position:absolute;
+    height: 30%;
+    width: 100%;
+}
+.imgheadCC{
+    position:fixed;
+    height: 30%;
+    width: 100%;
+
+}
+
+.imgAnimal{
+    width: 1200px;
+    height: 600px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.imgPessoa{
+width: 404px;
+height: 400px;
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+
+
+}
+
+.imgVeiculo
+{
+    width: 1000px;
+    height: 600px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+    }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+
+body {
+    display: inline-block;
+}
+
+.nav-button {
+    border: 0;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 8px;
+    cursor: pointer;
+}
+
+.nav-button {
+    color: black;
+}
+
+.overlay {
+    width: 0%;
+    height: 100%;
+    background-color:rgba(131, 136, 139, 0.718);
+    z-index: 9;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+    
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    text-align: center;
+    margin-top: 30px;
+    
+}
+
+.overlay a {
+    padding: 8px;
+    color:black;
+    display: block;
+    font-size: 34px;
+    transition: 0.5s;
+  
+
+}
+
+.overlay a:hover,
+.overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 25px;
+    right: 45px;
+    font-size: 60px;
+}
+
+.nome {
+    text-align: center;
+}
+
+/* Login*/
+
+.form {
+    background-color: rgba(131, 136, 139, 0.718);
+    max-width: 500px;
+    width: 70%;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+}
+
+.h3-form {
+    text-align: center;
+    color: rgb(0, 4, 8);
+    border-radius: 5px;
+}
+
+.input-form {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+
+}
+
+.input-form-submit {
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    background-color: rgb(51, 54, 57);
+    color: white;
+    border-radius: 5px;
+
+}
+
+.input-form-submit:hover {
+    background-color: rgba(51, 54, 57, 0.758);
+}
+
+/*Sobre*/
+
+.sobreh1 {
+    text-align: center;
+}
+
+.sobre {
+    text-align: justify;
+    padding: 2px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+/*Footer*/
+
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5%;
+    background-color: rgba(8, 8, 8, 0.601);
+    color: white;
+    text-align: center;
+    top: 180%;
+
+}
+
+/* icones */
+.app img {
+    position: relative;
+    width: 2%;
+
+
+}
+
+.app li {
+    position: relative;
+    display: inline;
+    margin: 5 0 0 10px;
+    bottom: -2px;
+}
+
+
+.app img:hover {
+    -webkit-transform: scale(1.25);
+    /* Safari and Chrome */
+    -moz-transform: scale(1.25);
+    /* Firefox */
+    -ms-transform: scale(1.25);
+    /* IE 9 */
+    -o-transform: scale(1.25);
+    /* Opera */
+    transform: scale(1.25);
+}
+
+/* COntatos*/
+
+
+/*Formulario*/
+
+.formulario {
+   
+    color: floralwhite;
+    background-color: rgba(51, 54, 57, 0.758);
+    padding: 10px;
+    border-radius: 20px;
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
+
+fieldset {
+
+    padding: 10px;
+    border-radius: 10px;
+    border-color: rgba(51, 54, 57, 0.758);
+
+}
+
+button.inicio a {
+    list-style: none;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+h1.form1 {
+    
+    color: #ebeff0;
+    text-align: center;
+    font-size: 15px;
+
+}
+
+legend {
+  
+    text-align: center;
+
+}
+
+#salvar {
+
+    background-image: linear-gradient(to right, rgba(51, 54, 57, 0.758), rgb(250, 254, 255));
+    border: none;
+    width: 100%;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 15px;
+}
+
+.input-form-submit2 {
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    background-color: rgb(51, 54, 57);
+    color: white;
+    border-radius: 2px;
+
+}
+
+.duvida {
+
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+
+/*Sindico
+
+.sindico {
+    display: inline-block;
+    width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    background-color: rgba(8, 8, 8, 0.601);
+    text-align: center;
+    
+}
+
+.sindico a {
+    list-style: none;
+    text-decoration: none;
+    list-style-type: none;
+    border: 1px solid #ccc;
+    background-color: rgb(51, 54, 57);
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    position: relative;
+    top: 20%;
+    padding: 2px;
+    letter-spacing: 1px;
+   
+
+}
+*/
+
+/*div para deixa abaixo da imagem*/
+.bemvindo{
+position: absolute;
+  top: 45%;
+}

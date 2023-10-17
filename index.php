@@ -1,62 +1,156 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
-<html>
-    
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SEJA BEM VINDO A EXPOCEEP</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <title>Expoceep</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts-icones.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .wrapper{
+            width: 600px;
+            margin: 0 auto;
+        }
+        table tr td:last-child{
+            width: 120px;
+        }
+        .box-search{
+            display: auto;
+            justify-content: center;
+            gap: .3%;  
+        }
+        .cxpesquisa{
+	        border-radius: 10px 20px;
+            width: 91%;
+            height:100%;
+        }
+        .expoceep{
+            width:20%;
+            height:20%;
+            text-align:center;
+
+        }
+        h2{
+            color:Green;
+            Font-weight:bold;
+        }
+    
+    </style>
+    
 </head>
-
 <body>
-    <section class="hero is-success is-fullheight">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="column is-4 is-offset-4">
-                    <img src ="logo.png" width="350px" height="250px">   
-                    <h3 class="title has-text-black">AREA DE ACESSO</h3> 
-                    <?php
-                    if(isset($_SESSION['nao_autenticado'])):
-                    ?>
-                    <div class="notification is-danger">
-                      <p>ERRO: Usuário ou senha inválidos.</p>
+<center><img src="logo.png" class="expoceep"/></center>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 mb-3 clearfix">
+                    
+                        <h2>Lista de Projetos</h2>
                     </div>
+            
+                    <div class="box-search">
+        <input type="search"  placeholder="Pesquisar" id="pesquisar" class="cxpesquisa">
+        <button onclick="searchData()" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+    </div>  
+            
+        </div><!-- Search -->
+    
+    </div><!--Box Busca-->
+                    
                     <?php
-                    endif;
-                    unset($_SESSION['nao_autenticado']);
+                    
+                    // Include config file
+                    require_once "conexao.php";
+                    
+                    // SELECT NA TABELA PARA LISTAR 
+                    $sql = "SELECT * FROM projeto";
+
+                    if(!empty($_GET['search']))
+    {
+        $data = $_GET['search'];
+        $sql = "SELECT * FROM projeto WHERE titulo LIKE '%$data%' ORDER BY idprojeto DESC";
+    }
+    else
+    {
+        $sql = "SELECT * FROM projeto ORDER BY idprojeto DESC";
+    }
+    
+
+                    if($result = mysqli_query($conexao, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+                            echo '<table class="table table-bordered table-striped">';
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        // COLUNAS DA TABELA DE LISTAGEM COM OS NOMES DOS CAMPOS
+                                        echo "<th>#</th>";
+                                        echo "<th>Titulo</th>";
+                                        echo "<th>Curso</th>";
+                                        echo "<th>Modalidade</th>";
+                                        echo "<th>Vizualizar</th>";
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['idprojeto'] . "</td>";
+                                        echo "<td>" . $row['titulo'] . "</td>";
+                                        echo "<td>" . $row['idcurso'] . "</td>";
+                                        echo "<td>" . $row['modalida_turno'] . "</td>";
+                                        echo "<td>";
+                                            echo '<a href="read.php?idprojeto='. $row['idprojeto'] .'" class="mr-3" title="Ver registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';  
+                                        echo "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                        }
+                    } else{
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+ 
+                    // Close connection
+                    mysqli_close($conexao);
+
                     ?>
-                    <div class="box">
-                        <form action="login.php" method="POST">
-                            <div class="field">
-                                <div class="control">
-                                    <input name="login" name="text" class="input is-large" placeholder="Seu usuário" autofocus="">
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <div class="control">
-                                    <input name="senha" class="input is-large" type="password" placeholder="Sua senha">
-                                </div>
-                            </div>
-
-                            <div class="field">
-                            
-                                
-                            </div>
-                            <button type="submit" class="button is-block is-link is-large is-fullwidth">Entrar</button>
-                        </form>
-                    </div>
+                    
                 </div>
-            </div>
+            </div>        
         </div>
-    </section>
+    </div>
 </body>
+<script>
+         
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        });
 
+    var search = document.getElementById('pesquisar');
+        search.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") 
+        {
+            searchData();
+        }
+    });
+        function searchData()
+    {
+        window.location = 'Index.php?search='+search.value;
+    }
+
+    </script>
 </html>
