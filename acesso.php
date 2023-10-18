@@ -55,7 +55,7 @@
     <center>
 <label>Caro Administrador Selecione abaixo a opção desejada:</label>
 <div>
-<p><a href="Index.php" class="btn btn-primary">Cadastrar</a></p>
+<p><a href="createProjeto.php" class="btn btn-primary">Cadastrar</a></p>
 
 <p><a href="Index.php" class="btn btn-primary">Atualizar</a></p>
 </div></center>
