@@ -159,7 +159,7 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
     });
         function searchData()
     {
-        window.location = 'Index.php?search='+search.value;
+        window.location = 'index.php?search='+search.value;
     }
 
     </script>

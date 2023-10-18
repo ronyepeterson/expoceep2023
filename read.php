@@ -154,7 +154,7 @@ if(isset($_GET["idprojeto"]) && !empty(trim($_GET["idprojeto"]))){
                         <label>Caminho</label>
                         <img src="<?php echo $row["caminhoImagemEnsalamento"]; ?>" />
                     </div>
-                    <p><a href="Index.php" class="btn btn-primary">Voltar</a></p>
+                    <p><a href="index.php" class="btn btn-primary">Voltar</a></p>
                 </div>
             </div>        
         </div>
