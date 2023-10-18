@@ -1,4 +1,12 @@
 <?php
+
+
+require_once "conexao.php";
+if (!mysqli_set_charset($conexao, 'utf8')) {
+    printf('Error ao usar utf8: %s', mysqli_error($conexao));
+    exit;
+}
+
 // Valida a existencia do parametro id antes de processar os dados
 if(isset($_GET["idprojeto"]) && !empty(trim($_GET["idprojeto"]))){
     // Inclui arquivo config
@@ -121,10 +129,7 @@ if(isset($_GET["idprojeto"]) && !empty(trim($_GET["idprojeto"]))){
                         <label>Curso</label>
                         <p><b><?php echo $nomecurso; ?></b></p>
                     </div>
-                    <div class="form-group">
-                        <label>Alunos:</label>
-                        <p><b><?php echo $nome; ?></b></p>
-                    </div>
+           
                     <div class="form-group">
                         <label>Modalidade Projeto</label>
                         <p><b><?php echo $row["modalida_proj"]; ?></b></p>

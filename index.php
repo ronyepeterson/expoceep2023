@@ -1,3 +1,13 @@
+<?php
+
+
+require_once "conexao.php";
+if (!mysqli_set_charset($conexao, 'utf8')) {
+    printf('Error ao usar utf8: %s', mysqli_error($conexao));
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,9 +105,9 @@
                                     echo "<tr>";
                                         // COLUNAS DA TABELA DE LISTAGEM COM OS NOMES DOS CAMPOS
                                         echo "<th>#</th>";
-                                        echo "<th>Titulo</th>";
+                                        echo "<th>Título do trabalho</th>";
                                         echo "<th>Curso</th>";
-                                        echo "<th>Modalidade</th>";
+                                        echo "<th>  Turno   </th>";
                                         echo "<th>Vizualizar</th>";
                                     echo "</tr>";
                                 echo "</thead>";

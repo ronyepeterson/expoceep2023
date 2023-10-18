@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 echo $sql;
         if ($stmt = mysqli_prepare($conexao, $sql)) {
             // Vincula variaveis com os parametros do comando
-            mysqli_stmt_bind_param($stmt, "sssssssssss", $param_email, $param_modalida_proj, $param_titulo, $param_titulo, 
+            mysqli_stmt_bind_param($stmt, "sssssssssss", $param_email, $param_modalida_proj, $param_titulo, $param_modalida_turno, 
             $param_serieturma, $param_nome_coordenador, $param_area_proj, $param_idusuario, 
             $param_idcurso, $param_caminhoImagemEnsalamento, $param_ensalamento);
 
@@ -102,18 +102,23 @@ echo $sql;
             $param_caminhoImagemEnsalamento = "img/" . $caminhoImagemEnsalamento;
             $param_ensalamento = $ensalamento;
 
-            echo $param_email."\n";
-            echo $param_modalida_proj."\n";
-            echo $param_titulo."\n";
-            echo $param_modalida_turno."\n";
-            echo $param_serieturma."\n";
-            echo $param_nome_coordenador."\n";
-            echo $param_area_proj."\n";
+            echo $param_email."<br>";
+            echo $param_modalida_proj."<br>";
+            echo $param_titulo."<br>";
+            echo $param_modalida_turno."<br>";
+            echo $param_serieturma."<br>";
+            echo $param_nome_coordenador."<br>";
+            echo $param_area_proj."<br>";
             echo " id usuario: ".$param_idusuario;
-            echo " id curso: ".$param_idcurso."\n";
-            echo $param_caminhoImagemEnsalamento."\n";
-            echo $param_ensalamento."\n";
+            echo "<br> id curso: ".$param_idcurso."<br>";
+            echo $param_caminhoImagemEnsalamento."<br>";
+            echo $param_ensalamento."<br>";
 
+            //$linha = mysqli_stmt_execute($stmt);
+
+            //Utilize a tag PRE do HTML para manter a formatação no navegador.
+            //echo "<pre> OI? "; print_r($linha); echo "</pre>"; exit;
+        
             // Tentativa de execucao do comando
             if (mysqli_stmt_execute($stmt)) {
                 // Registros criados com sucesso. Redireciona para index.php
@@ -159,7 +164,7 @@ echo $sql;
                     <p>Por favor, preencha o formulário e salve os dados para inserir o o projeto na base de dados</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>Titulo do Trabalho</label>
+                            <label>Título do Trabalho</label>
                             <input type="text" name="titulo" class="form-control <?php echo (!empty($titulo_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $titulo; ?>">
                             <span class="invalid-feedback"><?php echo $titulo_err; ?></span>
                         </div>
