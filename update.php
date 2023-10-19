@@ -3,13 +3,15 @@
 //include('verifica_login.php');
 require_once "conexao.php";
 
+if (!mysqli_set_charset($conexao, 'utf8')) {
+    printf('Error ao usar utf8: %s', mysqli_error($conexao));
+    exit;
+}
 
 // Define variaveis e inicializa com valor vazio
 $modalida_proj = $titulo = $modalida_turno = $serieturma = $nome_coordenador = $area_proj = $caminhoImagemEnsalamento = $ensalamento = "";
 $modalida_proj_err = $titulo_err = $modalida_turno_err = $serieturma_err = $nome_coordenador_err = $area_proj_err = $caminhoImagemEnsalamento_err = $ensalamento_err = "";
 
-$sqlSubGrupo = "SELECT * FROM projeto";
-$resultSub = mysqli_query($conexao, $sqlprojeto);
 
 // Processa os formulario quando os dados sao submetidos
 if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
@@ -83,12 +85,12 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
     // Valida erros do formulario antes de processar os dados
     if (empty($modalida_proj_err) && empty($titulo_err) && empty($modalida_turno_err) && empty($serieturma_err) && empty($nome_coordenador_err) && empty($area_proj_err) && empty($caminhoImagemEnsalamento_err) && empty($ensalamento_err)) {
         // Prepara comando update
-        $sql = "UPDATE projeto SET modalida_proj=?, titulo=?, modalida_turno=?, serieturma=?, nome_coordenador=?, area_proj=?, caminhoImagemEnsalamento=?, ensalamento=? WHERE id=?";
+        $sql = "UPDATE projeto SET modalida_proj=?, titulo=?, modalida_turno=?, serieturma=?, nome_coordenador=?, area_proj=?, caminhoImagemEnsalamento=?, ensalamento=? WHERE idprojeto=?";
         
 
         if ($stmt = mysqli_prepare($conexao, $sql)) {
             // Vincula variaveis com os parametros do comando
-            mysqli_stmt_bind_param($stmt, "ssssssss", $param_modalida_proj, $param_titulo, $param_modalida_turno, $param_serieturma, $param_nome_coordenador, $param_area_proj, $param_caminhoIamgemEnsalamento, $param_ensalamento);
+            mysqli_stmt_bind_param($stmt, "ssssssssi", $param_modalida_proj, $param_titulo, $param_modalida_turno, $param_serieturma, $param_nome_coordenador, $param_area_proj, $param_caminhoIamgemEnsalamento, $param_ensalamento);
 
             // Atribui parametros
             $param_modalida_poj = $modalida_proj;
@@ -104,7 +106,7 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
             // Tentativa de execucao do comando
             if (mysqli_stmt_execute($stmt)) {
                 // Registros atualizados com sucesso. Redireciona para a listagem 
-                header("location: update.php");
+                header("location: index.php");
                 exit();
             } else {
                 echo "Oops! Alguma coisa deu errado. Por favor, tente novamente mais tarde.";
@@ -119,12 +121,12 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
     mysqli_close($conexao);
 } else {
     // Valida a existencia do parametro id antes de processar os dados
-    if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
+    if (isset($_GET["idprojeto"]) && !empty(trim($_GET["idprojeto"]))) {
         // Pega parametro da URL
-        $id =  trim($_GET["id"]);
+        $id =  trim($_GET["idprojeto"]);
 
         // Prepara comando select
-        $sql = "SELECT * FROM projeto WHERE id = ?";
+        $sql = "SELECT * FROM projeto WHERE idprojeto = ?";
         if ($stmt = mysqli_prepare($conexao, $sql)) {
             // Vincula variaveis com os parametros do comando
             mysqli_stmt_bind_param($stmt, "i", $param_id);
