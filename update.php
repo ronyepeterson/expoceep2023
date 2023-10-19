@@ -12,9 +12,9 @@ $sqlSubGrupo = "SELECT * FROM projeto";
 $resultSub = mysqli_query($conexao, $sqlprojeto);
 
 // Processa os formulario quando os dados sao submetidos
-if (isset($_POST["id"]) && !empty($_POST["id"])) {
+if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
     // Pega atributo escondido
-    $id = $_POST["id"];
+    $id = $_POST["idprojeto"];
 
     // Valida descricao
     $input_modalida_proj = trim($_POST["modalida_proj"]);
