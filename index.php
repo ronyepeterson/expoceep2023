@@ -120,7 +120,8 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
                                         echo "<td>" . $row['modalida_turno'] . "</td>";
                                         echo "<td>";
                                             echo '<a href="read.php?idprojeto='. $row['idprojeto'] .'" class="mr-3" title="Ver registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';  
-                                        echo "</td>";
+                                            echo '<a href="update.php?idprojeto='. $row['idprojeto'] .'" class="mr-3" title="Ver registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>'; 
+                                            echo "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";                            
