@@ -1,6 +1,6 @@
 <?php
 // Inclui arquivo config
-include("header.php");
+//include('verifica_login.php');
 require_once "conexao.php";
 
 
