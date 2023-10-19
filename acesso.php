@@ -57,7 +57,7 @@
 <div>
 <p><a href="createProjeto.php" class="btn btn-primary">Cadastrar</a></p>
 
-<p><a href="Index.php" class="btn btn-primary">Atualizar</a></p>
+<p><a href="update.php" class="btn btn-primary">Atualizar</a></p>
 </div></center>
 
 </body>
