@@ -14,19 +14,24 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expoceep</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <!-- Inclua os arquivos CSS do Bootstrap -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <!-- Se você estiver usando os ícones do Bootstrap, inclua também o arquivo CSS dos ícones -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/fonts-icones.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts-icones.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         .wrapper {
-            width: 600px;
+            width: auto;
             margin: 0 auto;
         }
 
@@ -42,7 +47,7 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
 
         .cxpesquisa {
             border-radius: 10px 20px;
-            width: 91%;
+            width: 95%;
             height: 100%;
         }
 
@@ -75,7 +80,7 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
                     <div class="box-search">
                         <input type="search" placeholder="Pesquisar" id="pesquisar" class="cxpesquisa">
                         <button onclick="searchData()" class="btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg>
                         </button>
@@ -107,12 +112,12 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
                     echo "<thead>";
                     echo "<tr>";
                     // COLUNAS DA TABELA DE LISTAGEM COM OS NOMES DOS CAMPOS
-                    echo "<th>#</th>";
-                    echo "<th>Título do trabalho</th>";
-                    echo "<th>Curso</th>";
-                    echo "<th>  Turno   </th>";
-                    echo "<th>  Modalidade   </th>";
-                    echo "<th>Vizualizar</th>";
+                    echo "<th class='col-lg-1'>#</th>"; // Coluna de largura 1
+                    echo "<th class='col-lg-6'>Título do trabalho</th>"; // Coluna de largura 6
+                    echo "<th class='col-lg-2'>Curso</th>"; // Coluna de largura 2
+                    echo "<th class='col-lg-1'>Turno</th>"; // Coluna de largura 1
+                    echo "<th class='col-lg-1'>Modalidade</th>"; // Coluna de largura 1
+                    echo "<th class='col-lg-1'>Visualizar</th>"; // Coluna de largura 1
                     echo "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
