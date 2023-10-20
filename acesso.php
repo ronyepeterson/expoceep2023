@@ -49,6 +49,10 @@
         color:Green;
         Font-weight:bold;
     }
+    input{
+        width:11%;
+        height:11%;
+    }
 
 </style>
 <body>
@@ -57,7 +61,8 @@
 <div>
 <p><a href="createProjeto.php" class="btn btn-primary">Cadastrar</a></p>
 
-<p><a href="update.php" class="btn btn-primary">Atualizar</a></p>
+<p><a href="listaupdate.php" class="btn btn-primary">Atualizar</a></p>
+                        
 </div></center>
 
 </body>
