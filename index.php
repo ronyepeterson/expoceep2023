@@ -114,9 +114,9 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
                     // COLUNAS DA TABELA DE LISTAGEM COM OS NOMES DOS CAMPOS
                     echo "<th class='col-lg-1'>#</th>"; // Coluna de largura 1
                     echo "<th class='col-lg-6'>Título do trabalho</th>"; // Coluna de largura 6
-                    echo "<th class='col-lg-2'>Curso</th>"; // Coluna de largura 2
+                    echo "<th class='col-lg-1'>Curso</th>"; // Coluna de largura 2
                     echo "<th class='col-lg-1'>Turno</th>"; // Coluna de largura 1
-                    echo "<th class='col-lg-1'>Modalidade</th>"; // Coluna de largura 1
+                    echo "<th class='col-lg-2'>Sala</th>"; // Coluna de largura 1
                     echo "<th class='col-lg-1'>Visualizar</th>"; // Coluna de largura 1
                     echo "</tr>";
                     echo "</thead>";
@@ -127,7 +127,7 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
                         echo "<td>" . $row['titulo'] . "</td>";
                         echo "<td>" . $row['idcurso'] . "</td>";
                         echo "<td>" . $row['modalida_turno'] . "</td>";
-                        echo "<td>" . $row['modalida_proj'] . "</td>";
+                        echo "<td>" . $row['ensalamento'] . "</td>";
                         echo "<td>";
                         echo '<a href="read.php?idprojeto=' . $row['idprojeto'] . '" class="mr-3" title="Ver registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                         echo "</td>";
