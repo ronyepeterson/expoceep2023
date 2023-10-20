@@ -100,7 +100,7 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
 
             if (!empty($_GET['search'])) {
                 $data = $_GET['search'];
-                $sql = "SELECT * FROM projeto WHERE titulo LIKE '%$data%' ORDER BY idprojeto DESC";
+                $sql = "SELECT * FROM projeto WHERE titulo LIKE '%$data%' OR idcurso = '$data' ORDER BY idprojeto DESC";
             } else {
                 $sql = "SELECT * FROM projeto ORDER BY idprojeto DESC";
             }
