@@ -1,6 +1,6 @@
 <?php
-// Inclui arquivo config
-//include('verifica_login.php');
+//x Inclui arquivo config
+include('verifica_login.php');
 require_once "conexao.php";
 
 if (!mysqli_set_charset($conexao, 'utf8')) {
@@ -9,8 +9,8 @@ if (!mysqli_set_charset($conexao, 'utf8')) {
 }
 
 // Define variaveis e inicializa com valor vazio
-$modalida_proj = $titulo = $modalida_turno = $serieturma = $nome_coordenador = $area_proj = $caminhoImagemEnsalamento = $ensalamento = "";
-$modalida_proj_err = $titulo_err = $modalida_turno_err = $serieturma_err = $nome_coordenador_err = $area_proj_err = $caminhoImagemEnsalamento_err = $ensalamento_err = "";
+$modalida_proj = $modalida_turno = $serieturma = $nome_coordenador = $area_proj = $caminhoImagemEnsalamento = $ensalamento = "";
+$modalida_proj_err = $modalida_turno_err = $serieturma_err = $nome_coordenador_err = $area_proj_err = $caminhoImagemEnsalamento_err = $ensalamento_err = "";
 
 
 // Processa os formulario quando os dados sao submetidos
@@ -26,13 +26,6 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
         $modalida_proj = $input_modalida_proj;
     }
 
-    // Valida codigo
-    $input_titulo = trim($_POST["titulo"]);
-    if (empty($input_titulo)) {
-        $titulo_err = "Por favor, digite uma descricao.";
-    } else {
-        $titulo = $input_titulo;
-    }
 
     // Valida qtd
     $input_modalida_turno = trim($_POST["modalida_turno"]);
@@ -83,30 +76,30 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
 
 
     // Valida erros do formulario antes de processar os dados
-    if (empty($modalida_proj_err) && empty($titulo_err) && empty($modalida_turno_err) && empty($serieturma_err) && empty($nome_coordenador_err) && empty($area_proj_err) && empty($caminhoImagemEnsalamento_err) && empty($ensalamento_err)) {
+    if (empty($modalida_proj_err) && empty($modalida_turno_err) && empty($serieturma_err) && empty($nome_coordenador_err) && empty($area_proj_err) && empty($caminhoImagemEnsalamento_err) && empty($ensalamento_err)) {
         // Prepara comando update
-        $sql = "UPDATE projeto SET modalida_proj=?, titulo=?, modalida_turno=?, serieturma=?, nome_coordenador=?, area_proj=?, caminhoImagemEnsalamento=?, ensalamento=? WHERE idprojeto=?";
+        $sql = "UPDATE projeto SET modalida_proj=?, modalida_turno=?, serieturma=?, nome_coordenador=?, area_proj=?, caminhoImagemEnsalamento=?, ensalamento=? WHERE idprojeto=?";
         
-
+echo $sql;
         if ($stmt = mysqli_prepare($conexao, $sql)) {
             // Vincula variaveis com os parametros do comando
-            mysqli_stmt_bind_param($stmt, "ssssssssi", $param_modalida_proj, $param_titulo, $param_modalida_turno, $param_serieturma, $param_nome_coordenador, $param_area_proj, $param_caminhoIamgemEnsalamento, $param_ensalamento);
+            mysqli_stmt_bind_param($stmt, "sssssssi", $param_modalida_proj, $param_modalida_turno, $param_serieturma, $param_nome_coordenador, $param_area_proj, $param_caminhoImagemEnsalamento, $param_ensalamento, $idprojeto);
 
             // Atribui parametros
             $param_modalida_poj = $modalida_proj;
-            $param_titulo = $titulo;
             $param_modalida_turno = $modalida_turno;
             $param_serieturma = $serieturma;
             $param_nome_coordenador = $nome_coordenador;
             $param_area_proj = $area_proj;
             $param_caminhoImagemEnsalamento = $caminhoImagemEnsalamento;
             $param_ensalamento = $ensalamento;
+            $param_id = $idprojeto;
 
 
             // Tentativa de execucao do comando
             if (mysqli_stmt_execute($stmt)) {
                 // Registros atualizados com sucesso. Redireciona para a listagem 
-                header("location: index.php");
+                header("location: listaupdate.php");
                 exit();
             } else {
                 echo "Oops! Alguma coisa deu errado. Por favor, tente novamente mais tarde.";
@@ -123,16 +116,16 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
     // Valida a existencia do parametro id antes de processar os dados
     if (isset($_GET["idprojeto"]) && !empty(trim($_GET["idprojeto"]))) {
         // Pega parametro da URL
-        $id =  trim($_GET["idprojeto"]);
+        $idprojeto =  trim($_GET["idprojeto"]);
 
         // Prepara comando select
         $sql = "SELECT * FROM projeto WHERE idprojeto = ?";
-        if ($stmt = mysqli_prepare($conexao, $sql)) {
+        if ($stmt = mysqli_prepare($conexao, $sql)) {   
             // Vincula variaveis com os parametros do comando
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
             // Atribui parametros
-            $param_id = $id;
+            $param_id = $idprojeto;
 
             // Tentativa de execucao do comando
             if (mysqli_stmt_execute($stmt)) {
@@ -145,7 +138,6 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
 
                     // Recupera valor dos campos individualmente
                     $modalida_proj = $row["modalida_proj"];
-                    $titulo = $row["titulo"];
                     $modalida_turno = $row["modalida_turno"];
                     $serieturma = $row["serieturma"];
                     $nome_coordenador = $row["nome_coordenador"];
@@ -155,7 +147,8 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
 
                 } else {
                     // URL nao contem parametro id valido. Redireciona para pagina de erro
-                    header("location: error.php");
+                    //header("location: error.php");
+                    echo $sql;
                     exit();
                 }
             } else {
@@ -170,6 +163,7 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
         mysqli_close($conexao);
     } else {
         // URL nao contem parametro id. Redireciona para pagina de erro
+        //echo $sql;
         header("location: error.php");
         exit();
     }
@@ -197,10 +191,11 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5"> Novo registro </h2>
+                    <h2 class="mt-5"> Atualização de Registro </h2>
                     <p>Por favor, preencha o formulário e salve os dados para inserir o o projeto na base de dados</p>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="form-group">
+                <form action="<?php echo htmlspecialchars(basename($_SERVER["REQUEST_URI"])); ?>" method="post">
+                    
+                    <div class="form-group">
                             <label>Modalidade Projeto</label>
                             <br>
 
@@ -208,6 +203,7 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
                                 <option value="Trabalho de Pesquisa Escolar">Trabalho de Pesquisa Escolar</option>
                                 <option value="Trabalho de Iniciação Científica">Trabalho de Iniciação Científica</option>
                             </select>
+                            <span class="invalid-feedback"><?php echo $modalida_proj_err; ?></span>
                         </div>
 
 
@@ -215,7 +211,7 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
                             <label>Modalidade Turno</label>
                             <br>
 
-                            <select name="modalida_turno">
+                          <select name="modalida_turno">
                                 <option value="Integrado - Manhã">Integrado - Manhã</option>
                                 <option value="Integrado - Tarde">Integrado - Tarde</option>
                                 <option value="Subsequente - Noite">Subsequente - Manhã</option>
@@ -253,14 +249,16 @@ if (isset($_POST["idprojeto"]) && !empty($_POST["idprojeto"])) {
                         <div class="form-group">
                             <label for="caminhoImagemEnsalamento">Imagem Ensalamento</label>
                             <input type="file" id="caminhoImagemEnsalamento" name="caminhoImagemEnsalamento" class="form-control <?php echo (!empty($caminhoImagemEnsalamento_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $caminhoImagemEnsalamento; ?>">
-                            <span class="invalid-feedback"><?php echo $caminhoImagemEnsalamento_err; ?></span>
+                        
                         </div>
+                       
+                        <input type="hidden" name="idprojeto" value="<?php echo $idprojeto; ?>" />
                         <input type="submit" class="btn btn-primary" value="Salvar">
                         <a href="index.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>
                 </div>
             </div>
-        </div>
+        </div>  
     </div>
 </body>
 
